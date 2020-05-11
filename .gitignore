@@ -1,0 +1,11 @@
+.DS_Store
+/*.dsc
+*.deb
+*.ddeb
+/*.tar.gz
+/*.tar.xz
+/*.buildinfo
+/*.changes
+/*.upload
+/*.git
+/libnginx-mod-http-modsecurity-*
