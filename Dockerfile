@@ -2,14 +2,14 @@
 #
 #
 
-FROM arm32v7/debian:buster
+FROM debian:buster
 
 LABEL maintainer="Nick Gregory <docker@openenterprise.co.uk>"
 
-ARG GOLANG_VERSION="1.14.2"
-ARG GOLANG_SHA256="eb4550ba741506c2a4057ea4d3a5ad7ed5a887de67c7232f1e4795464361c83c"
+ARG GOLANG_VERSION="1.17.6"
+ARG GOLANG_SHA256="82c1a033cce9bc1b47073fd6285233133040f0378439f3c4659fe77cc534622a"
 
-ARG WALG_VERSION="v0.2.16-2"
+ARG WALG_VERSION="v1.1"
 
 # basic build infra
 RUN apt-get -y update \
@@ -20,10 +20,10 @@ RUN apt-get -y update \
 
 RUN cd /tmp \
     && echo "==> Downloading Golang..." \
-    && curl -fSL  https://dl.google.com/go/go${GOLANG_VERSION}.linux-armv6l.tar.gz -o go${GOLANG_VERSION}.linux-armv6l.tar.gz \
-    && sha256sum go${GOLANG_VERSION}.linux-armv6l.tar.gz \
-    && echo "${GOLANG_SHA256}  go${GOLANG_VERSION}.linux-armv6l.tar.gz" | sha256sum -c - \
-    && tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-armv6l.tar.gz
+    && curl -fSL  https://go.dev/dl/go${GOLANG_VERSION}.linux-arm64.tar.gz -o go${GOLANG_VERSION}.linux-arm64.tar.gz \
+    && sha256sum go${GOLANG_VERSION}.linux-arm64.tar.gz \
+    && echo "${GOLANG_SHA256}  go${GOLANG_VERSION}.linux-arm64.tar.gz" | sha256sum -c - \
+    && tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-arm64.tar.gz
 
 # package deps
 RUN apt-get -y install postgresql-server-dev-11 liblzo2-dev libsodium-dev
@@ -32,7 +32,7 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 
 # package build
 RUN cd /tmp \ 
-    && git clone https://github.com/NixM0nk3y/wal-g.git \
+    && git clone https://github.com/wal-g/wal-g.git \
     && cd wal-g \
     && git checkout ${WALG_VERSION} \
     && export USE_LIBSODIUM=true \
