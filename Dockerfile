@@ -2,14 +2,14 @@
 #
 #
 
-FROM debian:buster
+FROM debian:bookworm
 
 LABEL maintainer="Nick Gregory <docker@openenterprise.co.uk>"
 
-ARG GOLANG_VERSION="1.17.6"
-ARG GOLANG_SHA256="82c1a033cce9bc1b47073fd6285233133040f0378439f3c4659fe77cc534622a"
+ARG GOLANG_VERSION="1.23.2"
+ARG GOLANG_SHA256="f626cdd92fc21a88b31c1251f419c17782933a42903db87a174ce74eeecc66a9"
 
-ARG WALG_VERSION="v1.1"
+ARG WALG_VERSION="v3.0.3"
 
 # basic build infra
 RUN apt-get -y update \
