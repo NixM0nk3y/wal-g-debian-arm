@@ -26,7 +26,7 @@ RUN cd /tmp \
     && tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-arm64.tar.gz
 
 # package deps
-RUN apt-get -y install postgresql-server-dev-11 liblzo2-dev libsodium-dev
+RUN apt-get -y install postgresql-server-dev-15 liblzo2-dev libsodium-dev
 
 ENV PATH="/usr/local/go/bin:${PATH}"
 
