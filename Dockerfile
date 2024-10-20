@@ -37,6 +37,7 @@ RUN cd /tmp \
     && git checkout ${WALG_VERSION} \
     && export USE_LIBSODIUM=true \
     && export USE_LZO=true \
+    && export USE_BROTLI=true \
     && make install \
     && make deps \
     && make pg_build
@@ -44,7 +45,7 @@ RUN cd /tmp \
 # package install
 RUN cd /tmp/wal-g \
     && install -D -m 0755 main/pg/wal-g /install/usr/local/bin/wal-g \
-    && fpm -s dir -t deb -C /install --name wal-g-postgresql --version $(echo ${WALG_VERSION}| sed -e s/v//) --iteration 3 \
+    && fpm -s dir -t deb -C /install --name wal-g-postgresql --version $(echo ${WALG_VERSION}| sed -e s/v//) --iteration 4 \
        --description "Archival and Restoration for Postgres"
 
 STOPSIGNAL SIGTERM
