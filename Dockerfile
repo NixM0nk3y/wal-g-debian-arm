@@ -26,7 +26,7 @@ RUN cd /tmp \
     && tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-arm64.tar.gz
 
 # package deps
-RUN apt-get -y install postgresql-server-dev-15 liblzo2-dev libsodium-dev
+RUN apt-get -y install postgresql-server-dev-15 liblzo2-dev libsodium-dev libbrotli-dev curl cmake
 
 ENV PATH="/usr/local/go/bin:${PATH}"
 
@@ -44,7 +44,7 @@ RUN cd /tmp \
 # package install
 RUN cd /tmp/wal-g \
     && install -D -m 0755 main/pg/wal-g /install/usr/local/bin/wal-g \
-    && fpm -s dir -t deb -C /install --name wal-g-postgresql --version $(echo ${WALG_VERSION}| sed -e s/v//) --iteration 2 \
+    && fpm -s dir -t deb -C /install --name wal-g-postgresql --version $(echo ${WALG_VERSION}| sed -e s/v//) --iteration 3 \
        --description "Archival and Restoration for Postgres"
 
 STOPSIGNAL SIGTERM
