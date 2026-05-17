@@ -2,14 +2,14 @@
 #
 #
 
-FROM debian:bookworm
+FROM debian:trixie
 
 LABEL maintainer="Nick Gregory <docker@openenterprise.co.uk>"
 
-ARG GOLANG_VERSION="1.23.2"
-ARG GOLANG_SHA256="f626cdd92fc21a88b31c1251f419c17782933a42903db87a174ce74eeecc66a9"
+ARG GOLANG_VERSION="1.26.3"
+ARG GOLANG_SHA256="9d89a3ea57d141c2b22d70083f2c8459ba3890f2d9e818e7e933b75614936565"
 
-ARG WALG_VERSION="v3.0.3"
+ARG WALG_VERSION="v3.0.8"
 
 # basic build infra
 RUN apt-get -y update \
@@ -26,7 +26,7 @@ RUN cd /tmp \
     && tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-arm64.tar.gz
 
 # package deps
-RUN apt-get -y install postgresql-server-dev-15 liblzo2-dev libsodium-dev libbrotli-dev curl cmake
+RUN apt-get -y install postgresql-server-dev-17 liblzo2-dev libsodium-dev libbrotli-dev curl cmake
 
 ENV PATH="/usr/local/go/bin:${PATH}"
 
