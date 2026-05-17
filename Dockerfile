@@ -38,6 +38,7 @@ RUN cd /tmp \
     && export USE_LIBSODIUM=true \
     && export USE_LZO=true \
     && export USE_BROTLI=true \
+    && export GOEXPERIMENT=jsonv2 \
     && make install \
     && make deps \
     && make pg_build
